@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+	  <br/>
+	  <input id="slider" type="range" min="-100" max="100" />
+  
+      
+  <script>
+window.onload = function(){
+  var canvas = document.getElementById('myCanvas');
+  var context = canvas.getContext('2d');
+  var slider = document.getElementById('slider');
+
+  function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    var rotation = slider.value*0.001*Math.PI;
+
+    // wings
+    function linkWings() {
+    context.beginPath();
+    context.bezierCurveTo( 0,-20,  240,140, 10,40);
+    context.fillStyle = "#a6938c";
+    context.fill()
+    context.beginPath();
+    context.bezierCurveTo( 0,-20,  -250,130, -0,40);
+    context.fillStyle = "#a6938c";
+    context.fill();
+    }
+    
+    context.save();
+    context.translate(150,150);
+    context.rotate(rotation);
+    linkWings();
+    context.restore();
+    
+    //head
+    context.beginPath();
+    context.bezierCurveTo( 150,20,  200,10, 200,100);
+    context.lineTo(200,150);
+    context.lineTo(100,150);
+    context.bezierCurveTo( 100,50,  100,20, 150,20);
+    context.fillStyle = "green";
+	  context.fill();
+    context.closePath();
+    
+    //eyes
+    context.beginPath();
+    context.arc(130, 70, 15, 0, 2 * Math.PI, false);
+    context.fillStyle = "white";
+    context.fill();
+    context.closePath();
+    context.beginPath();
+    context.arc(170, 70, 15, 0, 2 * Math.PI, false);
+    context.fillStyle = "white";
+    context.fill();
+    context.beginPath();
+    context.arc(170, 70, 7, 0, 2 * Math.PI, false);
+    context.fillStyle = "black";
+    context.fill();
+    context.beginPath();
+    context.arc(130, 70, 7, 0, 2 * Math.PI, false);
+    context.fillStyle = "black";
+    context.fill();
+    
+    //bill
+    context.beginPath();
+    context.bezierCurveTo( 150,100,  160,120, 175,120);
+    context.bezierCurveTo( 175,120,  210,130, 155,130);
+    context.bezierCurveTo( 155,130,  90,130, 125,120);
+    context.bezierCurveTo( 125,120,  145,120, 150,100);
+    context.fillStyle = "orange";
+	  context.fill();
+    context.closePath();
+    
+    //left foot
+    context.beginPath();
+    context.rect(115,280,20,50);
+    context.fillStyle = "orange";
+	  context.fill();
+    context.closePath();
+    context.beginPath();
+    context.bezierCurveTo( 135,330,  0,370, 115,330);
+    context.fillStyle = "orange";
+	  context.fill();
+
+    //right foot
+    context.beginPath();
+    context.rect(165,280,20,50);
+    context.fillStyle = "orange";
+	  context.fill();
+    context.closePath();
+    context.beginPath();
+    context.bezierCurveTo( 185,330,  300,370, 165,330);
+    context.fillStyle = "orange";
+	  context.fill();
+    context.closePath();
+    
+    //body
+    context.beginPath();
+    context.lineTo(200,150);
+    context.lineTo(200,250);
+    context.bezierCurveTo( 200,250,  200,300, 150,300);
+    context.bezierCurveTo( 150,300,  100,300, 100,250);
+    context.lineTo(100,150);
+    context.fillStyle = "#5C4033";
+	  context.fill();
+    context.closePath();
+    
+  }
+  slider.addEventListener("input",draw);
+  draw();
+}
+  </script>
+</body>
+</html>
